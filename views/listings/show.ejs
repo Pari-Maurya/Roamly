@@ -1,24 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wanderlust</title>
-  </head>
-  <body>
-    <h3>Listing Details :</h3>
-    <ul>
-      <li><%= listing.title %></li>
-      <li><%= listing.description %></li>
-      <li>&#8377; <%= listing.price.toLocaleString("en-IN") %></li>
-      <li><%= listing.location %></li>
-      <li><%= listing.country %></li>
-    </ul>
-    <br />
-    <a href="/listings/<%= listing._id %>/edit">Edit this Listing</a>
-    <br /><br />
-    <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
-      <button>Delete this listing</button>
-    </form>
-  </body>
-</html>
+<% layout("/layouts/boilerplate") %>
+
+<div class="container my-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8 col-md-10">
+
+            <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+
+                <!-- Image -->
+                <img
+                    src="<%= listing.image.url %>"
+                    class="card-img-top"
+                    alt="<%= listing.title %>"
+                    style="height: 420px; object-fit: cover;"
+                >
+
+                <div class="card-body p-4">
+
+                    <h2 class="fw-bold mb-3">
+                        <%= listing.title %>
+                    </h2>
+
+                    <p class="text-muted mb-4">
+                        <strong>Description:</strong><br>
+                        <%= listing.description %>
+                    </p>
+
+                    <div class="border rounded-3 p-3 mb-3 bg-light">
+
+                        <p class="mb-2">
+                            <strong>💰 Price:</strong>
+                            ₹<%= listing.price.toLocaleString("en-IN") %>
+                        </p>
+
+                        <p class="mb-2">
+                            <strong>📍 Location:</strong>
+                            <%= listing.location %>
+                        </p>
+
+                        <p class="mb-0">
+                            <strong>🌎 Country:</strong>
+                            <%= listing.country %>
+                        </p>
+
+                    </div>
+
+                    <div class="d-flex gap-3 mt-4">
+
+                         <a href="/listings/<%= listing._id %>/edit"
+                          class="btn btn-edit">
+                            Edit
+                        </a>
+
+                        <form method="POST"
+                              action="/listings/<%= listing._id %>?_method=DELETE">
+
+                            <button class="btn btn-delete">
+                                Delete
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
